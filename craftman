@@ -842,7 +842,7 @@ cm_craftman_upgrade()
     cd "$CM_ROOT"
     git pull
   else
-    cm_log "Are you sure craftman was installed in $CM_ROOT? Try reinstalling running\n curl -o- https://raw.githubusercontent.com/gabrielmoreira/craftman/master/craftman_install | sh"
+    cm_log "Are you sure craftman was installed in $CM_ROOT? Try reinstalling running\n curl -o- https://raw.githubusercontent.com/petertait/craftman/master/craftman_install | sh"
   fi
 }
 

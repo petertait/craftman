@@ -76,7 +76,7 @@ Eg: `curl ... | CRAFTMAN_DIR="path/to/craftman" sh`
      craftman phpimage:get                        Shows current php image
      craftman phpimage:remove                     Clear php image
 
-    Full Documentation: https://github.com/gabrielmoreira/craftman
+    Full Documentation: https://github.com/petertait/craftman
 
 
 
