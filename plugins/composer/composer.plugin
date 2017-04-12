@@ -29,7 +29,7 @@ composer__generate()
 #!/bin/sh
 set -e
 echo "===> Installing PHP Composer"
-cd /scripts
+cd /config
 curl -sS https://getcomposer.org/installer | php
 EOF
   fi
@@ -48,8 +48,8 @@ composer__lock()
   mkdir -p "$CM_SCRIPTS_PATH/composer"
   cm_gitignore_add "*" "$CM_SCRIPTS_PATH/composer"
   cm_gitignore_add "!.gitignore" "$CM_SCRIPTS_PATH/composer"
-  docker cp "$CM_PROJECT_PATH/composer.json" "$(cm_craft_container):/scripts/composer"
-  cm_craft_exec "cd /scripts/composer && /scripts/composer.phar install && /scripts/composer.phar update"
+  docker cp "$CM_PROJECT_PATH/composer.json" "$(cm_craft_container):/config/composer"
+  cm_craft_exec "cd /config/composer && /config/composer.phar install && /config/composer.phar update"
   if [ -f "$CM_PROJECT_PATH/composer.lock" ]; then
     mv -f "$CM_PROJECT_PATH/composer.lock" "$CM_PROJECT_PATH/composer.lock.bak"
   fi
@@ -72,4 +72,3 @@ __composer__create_json()
 EOF
   fi
 }
-

@@ -39,7 +39,7 @@ cm_can_generate()
 
 	# then
 	result="$(cat "$HEROKU__PROCFILE")"
-	expected="web: vendor/bin/heroku-php-apache2 -i scripts/override/usr/local/etc/php/php.ini app/html"
+	expected="web: vendor/bin/heroku-php-apache2 -i config/override/usr/local/etc/php/php.ini app/html"
 	[[ "$result" == "$expected" ]]
 }
 

@@ -15,7 +15,7 @@ craftman_latest_version() {
 }
 
 craftman_source() {
-  echo "https://github.com/gabrielmoreira/craftman.git"
+  echo "https://github.com/petertait/craftman.git"
 }
 
 install_craftman_from_git() {
@@ -102,7 +102,7 @@ craftman_do_install() {
   SOURCE_STR="\nalias craftman=\"$CRAFTMAN_DIR/craftman\""
 
   if [ -z "$CRAFTMAN_PROFILE" ] ; then
-    echo "=> Profile not found. Tried $CRAFTMAN_PROFILE (as defined in \$PROFILE), ~/.bashrc, ~/.bash_profile, ~/.zshrc, and ~/.profile."
+    echo "=> Profile not found. Tried $CRAFTMAN_PROFILE (as defined in \$PROFILE), ~/.bashrc, ~/.bash_profile, ~/.config/fish/.config.fish, ~/.zshrc, and ~/.profile."
     echo "=> Create one of them and run this script again"
     echo "=> Create it (touch $CRAFTMAN_PROFILE) and run this script again"
     echo "   OR"

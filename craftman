@@ -109,9 +109,9 @@ SETVAR
 )
   CM_CRAFT_DOWNLOAD_URL="https://craftcms.com/latest.tar.gz?accept_license=yes"
   CM_CRAFT_FILENAME="craft-$(date "+%Y-%m").tar.gz"
-  CM_APP_DIR="site"
+  CM_APP_DIR="app"
   CM_BACKUPS_DIR="backups"
-  CM_SCRIPTS_DIR="scripts"
+  CM_SCRIPTS_DIR="config"
   CM_DOCKER_COMPOSE="docker-compose.yml"
   CM_INSTALLER_DIR="install"
   CM_INSTALL_DEPENDENCIES="010_dependencies.sh"
@@ -205,7 +205,7 @@ _cm_config()
   CM_CRAFT_TAR="$CM_CACHE/$CM_CRAFT_FILENAME"
   CM_DOCKER_CRAFT_DEFAULT_VOLUMES=$(cat <<SETVAR
     - "./$CM_APP_DIR:/var/www"
-    - "./$CM_SCRIPTS_DIR:/scripts"
+    - "./$CM_SCRIPTS_DIR:/config"
 SETVAR
 )
 
@@ -247,7 +247,7 @@ cm_usage()
   CM_TRIGGER_PRE="_cm_pre_plugin_usage"
   CM_TRIGGER_POST="_cm_post_plugin_usage"
   cm_trigger "usage"
-  echo "Full Documentation: https://github.com/gabrielmoreira/craftman"
+  echo "Full Documentation: https://github.com/petertait/craftman"
   echo
 }
 
@@ -432,7 +432,7 @@ _cm_generate_dependencies_install()
 #!/bin/sh
 set -e
 echo "===> Installing dependencies"
-cd /scripts && touch .gitignore
+cd /config && touch .gitignore
 
 echo "===> +  Configuring user and group"
 CM_USER="$CM_USER"
@@ -540,7 +540,7 @@ _cm_generate_docker_compose_config()
   if [ "$CM_GENERATE_FILE" != "" ]; then
     if [ "$CM_CRAFT_HTTP_PORT" != "" ]; then
       _CM_DOCKER_CRAFT_PORTS=$(cat <<SETVAR
-  ports:        
+  ports:
     - $CM_CRAFT_HTTP_PORT:80
 SETVAR
 )
@@ -761,7 +761,7 @@ cm_installer_run()
   else
     cm_log "Running install script $1"
     chmod +x "$FILE"
-    cm_craft_exec "/scripts/$CM_INSTALLER_DIR/$1"
+    cm_craft_exec "/config/$CM_INSTALLER_DIR/$1"
     touch "$CM_INSTALLER_PATH/$1.ok"
   fi
 }
@@ -789,7 +789,7 @@ cm_copy_files()
 {
   cm_log "Copying all files and directories from '$CM_SCRIPTS_PATH/override' to craft container root '/'.'"
   if [ -d "$CM_SCRIPTS_PATH/override" ]; then
-    cm_craft_exec "cd /scripts/override/ && yes | cp -rf . /"
+    cm_craft_exec "cd /config/override/ && yes | cp -rf . /"
     cm_log "All configuration files synced"
   else
     cm_log "Please, check if '$CM_SCRIPTS_PATH/override' directory exist"

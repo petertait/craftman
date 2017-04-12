@@ -50,9 +50,9 @@ phpimage__build()
   cm_log "+  Creating a new container for base image"
 	PHPIMAGE__DOCKER_CONTAINER=$(docker run -d \
     -v "$CM_APP_PATH:/var/www" \
-    -v "$CM_SCRIPTS_PATH:/scripts" \
+    -v "$CM_SCRIPTS_PATH:/config" \
     "$PHPIMAGE__BASEIMAGE")
-  
+
   cm_log "+  Running all installation scripts"
   CM_CUSTOM_CONTAINER_ID="$PHPIMAGE__DOCKER_CONTAINER"
   CM_FORCE_RECREATE="1"

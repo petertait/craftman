@@ -13,11 +13,11 @@ Note: `craftman` does not support Windows.
 
 To install or update craftman, you can use cURL:
 
-    curl -o- https://raw.githubusercontent.com/gabrielmoreira/craftman/master/craftman_install | sh
+    curl -o- https://raw.githubusercontent.com/petertait/craftman/master/craftman_install | sh
 
 or Wget:
 
-    wget -qO- https://raw.githubusercontent.com/gabrielmoreira/craftman/master/craftman_install | sh
+    wget -qO- https://raw.githubusercontent.com/petertait/craftman/master/craftman_install | sh
 
 <sub>The script clones the craftman repository to `~/.craftman/bin` and adds the source line to your profile (`~/.bash_profile`, `~/.zshrc` or `~/.profile`).</sub>
 
@@ -42,8 +42,8 @@ Eg: `curl ... | CRAFTMAN_DIR="path/to/craftman" sh`
      craftman ip                    Show Craft CMS docker container IP address
      craftman run                   Open bash or run a command on Craft docker container
      craftman regenerate            Regenerate all configuration files
-     craftman reconfigure           Run all scripts/install.* files
-     craftman copy                  Copy scripts/override/**/* to craft container root /
+     craftman reconfigure           Run all config/install.* files
+     craftman copy                  Copy config/override/**/* to craft container root /
      craftman remove                Remove all containers
      craftman --upgrade             Upgrade Craftman
 
@@ -54,7 +54,7 @@ Eg: `curl ... | CRAFTMAN_DIR="path/to/craftman" sh`
 
      -F, --force-all       Force redownload Craft CMS, regenerate and overwrite configurations and recreate containers
      -D, --force-download  Force to download latest Craft CMS from site
-     -O, --force-overwrite Force to overwrite generated configuration files at app/ and scripts/ directories
+     -O, --force-overwrite Force to overwrite generated configuration files at app/ and config/ directories
      -R, --force-recreate  Force to reconfigure and recreate containers
 
     PHP Composer commands:
@@ -204,26 +204,3 @@ If you try to install craft and the installation fails, you might get an error w
 You can try force `-F` to redownload craft, `-O` to regenerate configurations and `-R` to recreate containers, using:
 
     craftman -F -O -R install
-
-## TODO
-
-- [x] Build a local Docker base image with updated php and libraries for fast installations
-- [ ] Create user and group id on container if not exist
-- [ ] Rename craftman private variables to _CM
-- [ ] Rearrange functions in logical groups or files
-- [ ] Rename app/ to site/
-- [ ] Fix craft open browser on '0.0.0.0'
-
-## Roadmap
-
-- [x] MySQL backup and restore
-- [x] Heroku support (only using S3 or other cloud asset source)
-- [x] Plugins support
-- [ ] Support bash completion
-- [ ] Plugin install and update commands
-- [ ] Advanced composer support (E.g. craftman compose:run install, craftman compose:run update, ...)
-- [ ] Destroy all containers command
-- [ ] Full backup and restore (code directory and database)
-- [ ] OSX support
-- [ ] Redis support for session cache
-- [ ] Multi locale site structure generation
